@@ -5,7 +5,7 @@ from PyQt5.QtCore import QCoreApplication
 __QGIS_PLUGIN_NAME__ = 'SensorThings API'
 
 #: Constant to enable debug messages in plugin log.
-__PLG_DEBUG__ = True
+__PLG_DEBUG__ = False
 
 #: Global instance of configuration class
 plgConfig = None
