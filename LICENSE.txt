@@ -1,0 +1,20 @@
+SensorThings API * 2022 Dedagroup Spa
+
+Licensed under the terms of GNU GPL v3 (or any layer)
+http://www.gnu.org/copyleft/gpl.html
+
+
+Libraries:
+- font-awesome          v4.7.0   (Font: SIL OFL 1.1, CSS: MIT License)
+- jQuery                v1.12.4  (MIT License)
+- jQuery UI             v1.12.1  (MIT License)
+- DataTables            v1.10.22 (MIT License)
+- Bootstrap             v4.6.1   (MIT License)
+- bootstrap-datepicker  v1.9.0   (Apache License 2.0)
+- Chart.js              v2.9.4   (MIT License)
+- chartjs-plugin-zoom   v0.7.7   (MIT License)
+- moment.js                      (MIT License)
+- hammer.js             v2.0.7   (MIT License)
+
+Icons:
+

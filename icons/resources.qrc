@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/plugins/SensorThingsAPI/icons" >
+        <file>frost-layer-icon.png</file>
+        <file>action-identify-icon.png</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,41 @@
+##-------------------------------------
+## SensorThings API Plugin - Settings
+##-------------------------------------
+
+## Plugin settings
+plugin:
+
+
+## Layer setting
+layer:
+   styles:
+     default:
+       fillOpacity: 0.3
+       graphicOpacity: 1.0
+       strokeWidth: 1
+       pointRadius: 4
+       undefColor: "gray"
+       
+          
+## Chart settings
+chart:
+   line_color: "#32CD32"
+   line_colors: 
+             - "#8e24aa"
+             - "#3949ab"
+             - "#4dd0e1"
+             - "#43a047"
+             - "#fdd835"
+             - "#ff5722"
+             - "#b97a57"
+             - "#ffaec9"
+             - "#7f7f7f"
+             - "#000000"
+   
+
+## CSV export settings
+export:
+   field_delimiter_char: ","
+
+
+    

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> Bootstrap SORT table Example </title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<base href="{{ base_folder }}">
+ 
+<!-- Fontawesome -->
+<link rel="stylesheet" href="./fontawesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="./css/bootstrap.min.css">
+
+<!-- JQuery \ Bootstrap 4 -->
+<script src="./js/jquery-1.12.4.min.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+<script src="./js/jquery-ui.min.js"></script>
+
+<!-- Datatables -->
+<script src="./js/jquery.dataTables.min.js"></script>
+<script src="./js/dataTables.bootstrap4.min.js"></script>
+
+<link rel="stylesheet" href="./css/jquery-ui.min.css">
+<link rel="stylesheet" href="./css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="./css/dataTables.bootstrap4.min.css">
+
+
+<!-- Bootstrap Date-Picker Plugin -->
+<script type="text/javascript" src="./js/bootstrap-datepicker-1.9.0.min.js"></script>
+<link rel="stylesheet" href="./css/bootstrap-datepicker.standalone.min.css"/>
+
+<!-- Chart.js -->
+<script src="./js/moment.min.js"></script>
+<script src="./js/chartjs-2.9.4.min.js"></script>
+<script src="./js/hammerjs@2.0.8.js"></script>
+<script src="./js/chartjs-plugin-zoom@0.7.7.js"></script>
+
+<!-- Localization -->
+<script type="text/javascript" src="./js/locales/bootstrap-datepicker.it.min.js" charset="UTF-8"></script>
+<script type="text/javascript" src="./js/locales/bootstrap-dataTables.it.js" charset="UTF-8"></script>
+<script type="text/javascript" src="./templates/js/locales/sensor-things.it.js" charset="UTF-8"></script>
+
+
+<!-- Template CSS -->
+<link rel="stylesheet" href="./templates/css/template.css"/>
+
+<!-- Template JS -->
+<script src="./templates/js/sensor-things-locales.js"></script>
+<script src="./templates/js/sensor-things-date-range.js"></script>
+<script src="./templates/js/promise_util.js"></script>
+<script src="./templates/js/observations.js" defer></script>
+
+
+<style>
+/* Chart container */
+.chart-container {
+	position: relative; 
+	margin: auto;
+	height: 40vh;
+}
+._chart-container-uni {
+	height: calc(100vh - 19em);
+}
+._chart-container-multi {
+	height: calc(100vh - 26em);
+}
+</style>
+
+</head>
+<body>
+
+<!-- Spinner -->
+<div id="spinner-div" class="pt-5">
+  <div class="spinner-border text-primary center-div" role="status">
+  </div>
+</div>
+
+<!-- Header -->
+<div class="container-fluid bg-light" id="oss-header">
+<!--   <h3>{{ feature.locName|sn|e }}</h3> -->
+<!--   <p>{{ feature.lodDesc|sn|e }}</p> -->
+  <div class="row">
+    {% if isMultidataStream %}
+    	{% set cls='col-sm-3' %}
+    {% else %}
+    	{% set cls='col-sm-4' %}
+    {% endif %}
+    
+    <div class="{{ cls }}">
+      <h5 data-langkey="Location">Location</h5>
+      <p>{{ feature.locName|sn|e }}</p>
+      <p>{{ feature.lodDesc|sn|e }}</p>
+    </div>
+    <div class="{{ cls }}">
+      <h5 data-langkey="Station">Station</h5>
+      <p>{{ feature.locName|sn|e }}</p>
+      <p>{{ feature.lodDesc|sn|e }}</p>
+    </div>
+    <div class="{{ cls }}">
+      <h5>{{ selectRow.name|sn|e }}</h5>
+      <p>{{ selectRow.description|sn|e }}</p>
+      <p id='phenomenonTime'>
+         {{ selectRow.phenomenonTime|sn|e }}</p>
+      <p><img class="sensor-img" src="./icons/sensor_icon.png" alt="Sensor"/>
+         {{ selectRow.sensorData.name }} 
+         {% if not isMultidataStream %}({{ selectRow.unitOfMeasurement.symbol|sn|e }}){% endif %}
+       </p>
+    </div>
+    {% if isMultidataStream %}
+    <div class="{{ cls }}">
+      <h5 data-langkey="ObsProperties">Observed Properties</h5>
+      {% for prop in selectRow.observedProperty %}
+      <p>{{ prop.name|sn|e }} -- ({{ prop.__unitSymbol|sn|e }})</p>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+<!-- Main container -->
+<div class="container-fluid px-0">
+
+  <!-- Export CSV Modal -->
+  <div class="modal fade" id="exportModal" tabindex="-1" role="dialog"
+	   aria-labelledby="exportModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exportModalLabel" data-langkey="ExportDates">
+					Indicates the period for CSV exporting
+				</h5>
+				    
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body m-0 p-2">
+			
+			<div class="container-fluid m-0">
+				<!-- From date input -->
+				<div class="row">
+					<div class="col-md-1 p-0 text-right mr-2"><h6 data-langkey="FromDate">From:</h6></div>
+    				<div class="col m-0 p-0">
+    					<div class="date input-group m-0" id="dateCsvPickerStart">
+						  <input type="text" class="form-control">
+						  <div class="input-group-append">
+						    <button class="btn btn-light btn-sm border">
+					   		  <i class="fa fa-calendar-o"></i>
+							</button>
+						  </div>
+						</div>
+    				</div>
+				</div>
+				
+				<!-- To date input -->
+				<div class="row">
+					<div class="col-md-1 text-right p-0 mr-2"><h6 data-langkey="ToDate">To:</h6></div>
+    				<div class="col m-0 p-0">
+    					<div class="date input-group m-0" id="dateCsvPickerEnd">
+						  <input type="text" class="form-control">
+						  <div class="input-group-append">
+						    <button class="btn btn-light btn-sm border">
+					   		  <i class="fa fa-calendar-o"></i>
+							</button>
+						  </div>
+						</div>
+    				</div>
+				</div>
+			</div>
+				
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" id="downloadCsv" data-langkey="Download">Download</button>
+				<button type="button" class="btn btn-secondary mr-auto"
+					    data-dismiss="modal" data-langkey="Cancel">Cancel</button>
+			    
+			    <div class="row ml-auto">
+                    <label class="mr-2" for="exportOpenFlag" data-langkey="Open">Open</label>
+                    <input type="checkbox" id="exportOpenFlag" value="">
+                </div>
+			    
+				
+			</div>
+		</div>
+	</div>
+  </div>
+
+  <!-- Tabs navs -->
+  <ul class="nav nav-tabs" id="oss-tabs" role="tablist">
+  	<li class="nav-item">
+  		<a class="nav-link active" id="tab1" data-toggle="tab" href="#oss-table" 
+  		   role="tab" aria-controls="tab1" data-langkey="Values">Values</a>
+  	</li>
+	<li class="nav-item">
+		<a class="nav-link" id="tab2" data-toggle="tab" href="#oss-graph" 
+		   role="tab" aria-controls="tab2" data-langkey="Chart">Chart</a>
+	</li>
+  </ul>
+  
+  <!-- Tabs content -->
+  <div id="ar-tab-content-test" class="oss-content">
+    <div class="tab-pane show active min-margin" id="oss-table" role="tabpanel" aria-labelledby="tab1">
+    
+    	<!-- Values Table -->
+  		<table id="valori" class="table-bordered table-hover nowrap table-striped">      
+		</table>
+		
+  	</div>
+  	<div class="tab-pane pt-1" id="oss-graph" role="tabpanel" aria-labelledby="tab2">
+  	
+  		<!-- Values Chart -->
+  		<div id="chart-container" class="chart-container {% if isMultidataStream %}chart-container-multi{% else %}chart-container-uni{% endif %}">
+		    <canvas id="observation-chart"></canvas>
+		    <!-- Chart Spinner -->
+			<div id="chart_processing" class="dataTables_processing card" style="display: none;">
+			</div>
+		</div>
+		
+		
+		
+  	</div>
+  </div>
+
+</div>
+
+<!-- Footer -->
+<div class="fixed-bottom bg-light m-0 p-1" id="oss-footer">
+	<div class="row oss ml-1">
+	
+		<!-- Firt observation date label -->
+		<!--<div class="border-right border-dark p-2">-->
+		<div class="p-2" 
+		     data-toggle="tooltip" 
+		     title="There are no observations prior to this date"
+		     data-langtipkey="NoDateBefore">
+		     
+			<span id="labelDateFirst"></span>
+		</div>
+		
+		<!-- Minimal From date button -->
+		<button class="btn btn-light btn-sm"
+		        id="filterDateFirst"
+		        data-toggle="tooltip" 
+		        title="Move to the beginning"
+		        data-langtipkey="MoveToBegin">
+		        
+   			<i class="fa fa-angle-double-left"></i>
+		</button>
+		
+		<!-- Decrement From date button -->
+		<button class="btn btn-light btn-sm"
+		        id="filterDateDown"
+                data-toggle="tooltip" 
+		        title="Move back"
+		        data-langtipkey="MoveBack">
+		        
+   			<i class="fa fa-angle-left"></i>
+		</button>
+		
+		<!-- From date input -->
+		<div class="date input-group" id="datePickerStart">
+		  <input type="text" class="form-control" id="dateInputStart">
+		  <div class="input-group-append">
+		    <button class="btn btn-light btn-sm border">
+	   		  <i class="fa fa-calendar-o"></i>
+			</button>
+		  </div>
+		</div>
+		
+		<!-- To date input -->
+		<div class="date input-group" id="datePickerEnd">
+		  <input type="text" class="form-control" id="dateInputEnd">
+		  <div class="input-group-append border border-light">
+		    <button class="btn btn-light btn-sm border">
+	   		  <i class="fa fa-calendar-o"></i>
+			</button>
+		  </div>
+		</div>
+		
+		<!-- Increment To date button -->
+		<button class="btn btn-light btn-sm"
+		        id="filterDateUp"
+		        data-toggle="tooltip" 
+		        title="Move forward"
+		        data-langtipkey="MoveForward">
+		        
+   			<i class="fa fa-angle-right"></i>
+		</button>
+		
+		<!-- Maximal To date button -->
+		<button class="btn btn-light btn-sm"
+		        id="filterDateLast"
+		        data-toggle="tooltip" 
+		        title="Move to the end"
+		        data-langtipkey="MoveToEnd">
+		        
+   			<i class="fa fa-angle-double-right"></i>
+		</button>
+		
+		<!-- Last observation date label -->
+		<div class="p-2"
+		     data-toggle="tooltip" 
+		     title="Last observation date"
+		     data-langtipkey="LastObsDate">
+		     
+			<span id="labelDateLast"></span>
+		</div>
+		
+		<!-- Refresh button -->
+		<button class="btn btn-light btn-sm"
+		        id="filterRefresh"
+		        data-toggle="tooltip" 
+		        title="Update"
+		        data-langtipkey="Update">
+		        
+   			<i class="fa fa-refresh"></i>
+		</button>
+		
+		<!-- Download button -->
+		<button class="btn btn-light btn-sm"
+		        data-toggle="modal"
+		        data-target="#exportModal"
+		        title="Download CSV"
+		        data-langtipkey="DownloadCSV">
+		        
+   			<i class="fa fa-download"></i>
+		</button>
+	</div>
+</div>
+
+</body>
+</html>

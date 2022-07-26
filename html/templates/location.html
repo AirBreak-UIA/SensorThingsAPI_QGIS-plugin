@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<title> Bootstrap SORT table Example </title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<base href="{{ base_folder }}">
+
+<!-- Fontawesome -->
+<link rel="stylesheet" href="./fontawesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="./css/bootstrap.min.css">
+
+<!-- JQuery \ Bootstrap 4 -->
+<script src="./js/jquery-1.12.4.min.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+<script src="./js/jquery-ui.min.js"></script>
+
+<!-- Datatables -->
+<script src="./js/jquery.dataTables.min.js"></script>
+<script src="./js/dataTables.bootstrap4.min.js"></script>
+
+<link rel="stylesheet" href="./css/jquery-ui.min.css">
+<link rel="stylesheet" href="./css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="./css/dataTables.bootstrap4.min.css">
+
+<!-- Localization -->
+<script type="text/javascript" src="./js/locales/bootstrap-dataTables.it.js" charset="UTF-8"></script>
+<script type="text/javascript" src="./templates/js/locales/sensor-things.it.js" charset="UTF-8"></script>
+
+<!-- Template CSS -->
+<link rel="stylesheet" href="./templates/css/template.css"/>
+
+<!-- Template JS -->
+<script src="./templates/js/sensor-things-locales.js"></script>
+<script src="./templates/js/sensor-things-date-range.js"></script>
+<script src="./templates/js/promise_util.js"></script>
+<script src="./templates/js/location.js" defer></script>
+
+<style>
+/* Osservazioni image style */
+.oss-img:before {
+    content: "";
+    width: 18px;
+    height: 16px !important;
+    display: inline-block;
+    margin-right: 5px;
+    vertical-align: text-top;
+    background-color: transparent;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+/* Osservazioni image button */
+.oss-button:before {
+    background-image : url(./icons/drive_go.png);
+}
+
+.oss-button {
+	padding: 1px !important;
+}
+</style>
+
+</head>
+<body>
+
+<!-- Spinner -->
+<div id="spinner-div" class="pt-5">
+  <div class="spinner-border text-primary center-div" role="status">
+  </div>
+</div>
+
+<!-- Header -->
+<div class="container-fluid bg-light">
+  {% if features|length == 1 %}
+  <h4>{{ feature.locName|sn|e }}</h4>
+  {% else %}
+  <select class="custom-select loc-select" id="location-selector">
+  {% for feat in features %}
+  <option value="{{ feat.fid }}"
+  	{% if feat.fid == feature.fid %} selected{% endif %}>{{ feat.locName|sn|e }}</option>
+  {% endfor %}
+  </select>
+  {% endif %}
+  <h5>{{ feature.lodDesc|sn|e }}</h5>
+</div>
+
+<!-- Main container -->
+<div class="container-fluid px-0">
+
+  <!-- Tabs navs -->
+  <ul class="nav nav-tabs" id="thing-tabs" role="tablist">
+	  {% for thing in things %}
+	  <li class="nav-item">
+	  	<a class="nav-link {% if loop.index==1 %}active{% endif %}" 
+		   data-toggle="tab" 
+		   href="#{{thing['@iot.id']}}" 
+		   role="tab" 
+		   aria-controls="tab{{loop.index}}"">
+		   
+		 {{thing.name|sn|e}} - {{thing.description|sn|e}}
+		 </a>
+	  </li>
+	  {% endfor %}
+  </ul>
+  
+  
+  <!-- Tabs content -->
+  <div class="tab-content min-margin" id="thing-contents">
+	  {% for thing in things %}
+	  <div class="tab-pane {% if loop.index==1 %}show active{% endif %}" 
+	       id="{{thing['@iot.id']}}"
+	       role="tabpanel" 
+	       aria-labelledby="tab{{loop.index}}">
+        
+	    <!-- Datastream Table -->
+	    <div class="container-fluid m-0 p-0">
+		    <div class="panel-heading pl-1 font-weight-bold">
+		    	<span data-langkey="DataStreamTitle">Available observations</span>
+		    </div>
+		  	<table class="frost-stream table-bordered table-hover _nowrap table-striped" 
+			       thing-id={{thing['@iot.id']}}>
+			</table>
+		</div>
+		
+		<!-- MultiDatastreams Table -->
+		<div class="container-fluid m-0 p-0" id="multistream-container">
+			<div class="panel-heading pl-1 font-weight-bold">
+				<span data-langkey="MultiDataStreamTitle">Complex time series</span>
+			</div>
+		  	<table class="frost-stream frost-multidatastream table-bordered table-hover _nowrap table-striped" 
+			       thing-id={{thing['@iot.id']}}>
+			</table>
+		</div>
+	    
+	  </div>
+	  {% endfor %}
+  </div>
+  
+</div>
+
+</body>
+</html>
