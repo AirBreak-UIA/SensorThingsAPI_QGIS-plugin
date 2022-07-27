@@ -27,8 +27,8 @@ jobs:
       
       - name: Step 2 - Set variables
         run: |
-          source <(grep = metadata.txt)
-          echo "PLUGUN_VERSION=$version" >> $GITHUB_ENV
+          plf_ver=$(grep -Po "(?<=^version ).*" metadata.txt)
+          echo "PLUGUN_VERSION=$plf_ver" >> $GITHUB_ENV
       
       - name: Step 3 - Add artifacts to publish to the dist folder
         run: |
