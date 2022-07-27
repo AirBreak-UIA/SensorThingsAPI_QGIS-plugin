@@ -32,5 +32,6 @@ jobs:
           
       - name: execute py script # run the run.py to get the latest data
         run: |
-          python scripts/QGIS_Create_Plugin_Zip.py
+          cd scripts
+          python QGIS_Create_Plugin_Zip.py
           
