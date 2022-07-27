@@ -35,7 +35,7 @@ jobs:
           mkdir -p dist/SensorThingsAPI
           cp -r ./. ./dist/SensorThingsAPI
           
-      - name: Archive code coverage results
+      - name: Step 4 - Archive code coverage results
         uses: actions/upload-artifact@v3
         with:
           name: SensorThingsAPI.${{ env.PLUGUN_VERSION }}
