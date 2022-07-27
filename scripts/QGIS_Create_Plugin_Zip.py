@@ -76,7 +76,7 @@ class QgisPluginPacker:
         # pre checks (if some file exist, etc.)
         if not self.pack_pre_checks(plgFolder):
             print( "Preliminary packing checks not passed!!!!" )
-            return False
+            return False, None
         
         # get plugin metadata
         plg_metadata = self.get_metadata( plgFolder )
@@ -146,7 +146,7 @@ class QgisPluginPacker:
                 
         # exit successfully
         print( "Created archive: {}".format( zipfilePath ) )
-        return True
+        return True, zipfilePath
     
     def pack_files(self, 
                    plgFolder: str, 
@@ -191,5 +191,13 @@ print( os.linesep.join([
     "------------------------------",
 ]))
 
-res = plg_packer.pack( PLUGIN_PATH, PLUGIN_DIST_PATH, plgName=PLUGIN_NAME )
-print( "Result: {}".format(res))
+res, file = plg_packer.pack( PLUGIN_PATH, PLUGIN_DIST_PATH, plgName=PLUGIN_NAME )
+if res:
+    # set GitHub variable
+    file_name = os.path.basename(file)
+    env_file = os.getenv('GITHUB_ENV')
+    if env_file:
+        with open(env_file, "a") as f:
+            f.write("QGIS_PLUGIN_ARCHIVE={file_name}\n")
+        
+print( "Done: {}".format(res))
