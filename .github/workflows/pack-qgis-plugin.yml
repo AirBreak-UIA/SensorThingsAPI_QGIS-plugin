@@ -27,8 +27,8 @@ jobs:
       
       - name: Step 2 - Set variables
         run: |
-          plf_ver=$(grep -Po "(?<=^version ).*" metadata.txt)
-          echo "PLUGUN_VERSION=$plf_ver" >> $GITHUB_ENV
+          plg_ver=$(sed -nr "/^\[general\]/ { :l /^version[ ]*=/ { s/[^=]*=[ ]*//; p; q;}; n; b l;}" metadata.txt)
+          echo "PLUGIN_VERSION=$plg_ver" >> $GITHUB_ENV
       
       - name: Step 3 - Add artifacts to publish to the dist folder
         run: |
@@ -38,5 +38,5 @@ jobs:
       - name: Step 4 - Archive code coverage results
         uses: actions/upload-artifact@v3
         with:
-          name: SensorThingsAPI.${{ env.PLUGUN_VERSION }}
+          name: SensorThingsAPI.${{ env.PLUGIN_VERSION }}
           path: /tmp/SensorThingsAPI
