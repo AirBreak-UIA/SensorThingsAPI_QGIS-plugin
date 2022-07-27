@@ -22,20 +22,21 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
-
-      - name: setup python
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.8 #install the python needed
-          
-      - name: execute py script # run the run.py to get the latest data
+      - name: Step 1 - Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+        uses: actions/checkout@v3
+      
+      - name: Step 2 - Set variables
         run: |
-          python scripts/QGIS_Create_Plugin_Zip.py
+          VER=(grep var1 file.ini)
+          echo "PLUGUN_VERSION=$VER" >> $GITHUB_ENV
+      
+      - name: Step 3 - Add artifacts to publish to the dist folder
+        run: |
+          mkdir -p dist/SensorThingsAPI
+          cp -r ./. ./dist/SensorThingsAPI
           
       - name: Archive code coverage results
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ env.QGIS_PLUGIN_ARCHIVE_NAME }}
-          path: dist/${{ env.QGIS_PLUGIN_ARCHIVE_NAME }}
+          name: SensorThingsAPI.${{ env.PLUGUN_VERSION }}
+          path: dist/SensorThingsAPI
