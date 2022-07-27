@@ -32,11 +32,11 @@ jobs:
       
       - name: Step 3 - Add artifacts to publish to the dist folder
         run: |
-          mkdir -p dist/SensorThingsAPI
-          cp -r ./. ./dist/SensorThingsAPI
+          mkdir -p /tmp/SensorThingsAPI
+          cp -r ./. /tmp/SensorThingsAPI
           
       - name: Step 4 - Archive code coverage results
         uses: actions/upload-artifact@v3
         with:
           name: SensorThingsAPI.${{ env.PLUGUN_VERSION }}
-          path: dist/SensorThingsAPI
+          path: /tmp/SensorThingsAPI
