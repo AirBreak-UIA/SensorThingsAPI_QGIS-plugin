@@ -191,5 +191,5 @@ print( os.linesep.join([
     "------------------------------",
 ]))
 
-res = plg_packer.pack( PLUGIN_PATH, 'PLUGIN_DIST_PATH', plgName=PLUGIN_NAME )
+res = plg_packer.pack( PLUGIN_PATH, PLUGIN_DIST_PATH, plgName=PLUGIN_NAME )
 print( "Result: {}".format(res))
