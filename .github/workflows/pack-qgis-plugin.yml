@@ -32,8 +32,8 @@ jobs:
       
       - name: Step 3 - Add artifacts to publish to the dist folder
         run: |
-          mkdir -p /tmp/SensorThingsAPI
-          rsync -r ./. /tmp/SensorThingsAPI --exclude .git --exclude .github
+          mkdir -p /tmp/SensorThingsAPI/SensorThingsAPI
+          rsync -r ./. /tmp/SensorThingsAPI/SensorThingsAPI --exclude .git --exclude .github
           
       - name: Step 4 - Archive code coverage results
         uses: actions/upload-artifact@v3
