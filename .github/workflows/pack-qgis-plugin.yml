@@ -34,7 +34,6 @@ jobs:
         run: |
           mkdir -p /tmp/SensorThingsAPI
           rsync -r ./. /tmp/SensorThingsAPI --exclude .git --exclude .github
-          cp -r ./. /tmp/SensorThingsAPI
           
       - name: Step 4 - Archive code coverage results
         uses: actions/upload-artifact@v3
