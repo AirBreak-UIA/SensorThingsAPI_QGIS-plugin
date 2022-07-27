@@ -37,5 +37,5 @@ jobs:
       - name: Archive code coverage results
         uses: actions/upload-artifact@v3
         with:
-          name: dist
-          path: dist
+          name: ${{ env.QGIS_PLUGIN_ARCHIVE_NAME }}
+          path: dist/${{ env.QGIS_PLUGIN_ARCHIVE_NAME }}
