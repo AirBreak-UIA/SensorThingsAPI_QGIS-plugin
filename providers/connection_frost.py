@@ -149,19 +149,29 @@ class FrostConnection(QObject):
     
     def uniqueGroup(self, prop_text=None):
         """Creates an unique group with all locations"""
-        prop_text = prop_text or ''
+        # init
+        self._group_rows = []
         
-        self._group_rows = [{
-            'name': self.tr('Locations'),
-            'properties': prop_text,
-            'count': "{0}/{0}".format(len(self._loc_data)),
-            'url': self._url
-        }]
+        if self._loc_data:
+            prop_text = prop_text or ''
+            
+            self._group_rows = [{
+                'name': self.tr('Locations'),
+                'properties': prop_text,
+                'count': "{0}/{0}".format(len(self._loc_data)),
+                'url': self._url
+            }]
+            
         # return groups
         return self._group_rows
             
     def groupLocations(self):
         """Groups loacation by properties attributes"""
+        # init
+        self._group_rows = []
+        if not self._loc_data:
+            return []
+        
         try:
             # crate list od record readable for dataframe
             data = [{**i.get('properties',{}), '__data': i}  for i in self._loc_data]
@@ -198,13 +208,14 @@ class FrostConnection(QObject):
                 row = self._createGroupInfo(properties, grp_values, grp_items)
                 if row is not None:
                     self._group_rows.append(row)
-                
-            # return groups
-            return self._group_rows
             
         except Exception as ex:
             QgsMessageLog.logMessage(traceback.format_exc(), __FROST_PROVIDER_NAME__, Qgis.Critical)
             QMessageBox.critical(iface.mainWindow(), self.tr("Connection"), str(ex))
+            return []
+        
+        # return groups
+        return self._group_rows
             
             
     def _createGroupInfo(self, properties, group_values, group_items):

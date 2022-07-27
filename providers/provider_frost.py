@@ -59,9 +59,9 @@ from qgis.core import (
     QgsDataSourceUri
 )
 
-from qgis.PyQt.QtCore import QVariant, QUrl, QUrlQuery, QCoreApplication
+from qgis.PyQt.QtCore import QVariant, QUrl, QUrlQuery, QEventLoop, QCoreApplication
 from qgis.PyQt.QtNetwork import QNetworkRequest, QNetworkReply
-from qgis.core import QgsJsonUtils
+from qgis.core import QgsApplication, QgsJsonUtils
 
 
 #: Constant for provider name  
@@ -334,20 +334,27 @@ class FrostProvider(QgsVectorDataProvider):
             url = FrostProvider.correctQurlParams(url)
             nam = QgsNetworkAccessManager.instance()
             next_url = url.toString()
-            while next_url:
-                print("Next URL: ", next_url)
-                
-                # create request
-                request = QNetworkRequest(QUrl(next_url))
-                request.setPriority(QNetworkRequest.HighPriority)
-                request.setAttribute(QNetworkRequest.HttpPipeliningAllowedAttribute, True)
-                # no cache
-                request.setAttribute(QNetworkRequest.CacheLoadControlAttribute, QNetworkRequest.AlwaysNetwork)
-                request.setAttribute(QNetworkRequest.CacheSaveControlAttribute, False)
             
+            # create request
+            request = QNetworkRequest(QUrl(next_url))
+            request.setPriority(QNetworkRequest.HighPriority)
+            #request.setAttribute(QNetworkRequest.HttpPipeliningAllowedAttribute, True)
+            # no cache
+            request.setAttribute(QNetworkRequest.CacheLoadControlAttribute, QNetworkRequest.AlwaysNetwork)
+            request.setAttribute(QNetworkRequest.CacheSaveControlAttribute, False)
+            
+            # loop all page request
+            while next_url:
+                # create request
+                request.setUrl(QUrl(next_url))
+                
                 # send request 
-                reply = nam.blockingGet(request)
-                    
+                #reply = nam.blockingGet(request)
+                reply = nam.get(request)
+                while reply.isRunning() :
+                    QgsApplication.processEvents(QEventLoop.ExcludeUserInputEvents)
+                reply.deleteLater()
+                
                 # check if error
                 if reply.error() != QNetworkReply.NoError:
                     raise Exception(reply.errorString())
@@ -358,7 +365,12 @@ class FrostProvider(QgsVectorDataProvider):
                     raise Exception("{}: {}".format(msg, status_code))
                     
                 # get data
-                response = json.loads(str(reply.content(), 'utf-8')) or {}
+                #response = json.loads(str(reply.content(), 'utf-8')) or {}
+                if hasattr(reply, 'readAll'):
+                    response = json.loads(str( reply.readAll().data(), 'utf-8' ))
+                else:
+                    response = json.loads(str( reply.content(), 'utf-8' ))
+                    
                 read_rows = response.get('value', []) or []
                 rows.extend(read_rows)
                 

@@ -10,7 +10,7 @@
 name=SensorThings API
 qgisMinimumVersion=3.14
 description=Integrates QGIS with SensorThings API
-version=1.1.7
+version=1.1.8
 author=Sandro Moretti
 email=sandro.moretti@dedagroup.it
 
