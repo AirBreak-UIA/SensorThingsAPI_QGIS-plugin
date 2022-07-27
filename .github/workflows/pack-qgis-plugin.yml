@@ -32,11 +32,10 @@ jobs:
           
       - name: execute py script # run the run.py to get the latest data
         run: |
-          cd scripts
-          python QGIS_Create_Plugin_Zip.py
+          python scripts/QGIS_Create_Plugin_Zip.py
           
       - name: Archive code coverage results
         uses: actions/upload-artifact@v3
         with:
           name: dist
-          path: ./dist
+          path: dist
