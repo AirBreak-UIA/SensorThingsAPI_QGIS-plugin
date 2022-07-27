@@ -198,6 +198,6 @@ if res:
     env_file = os.getenv('GITHUB_ENV')
     if env_file:
         with open(env_file, "a") as f:
-            f.write("QGIS_PLUGIN_ARCHIVE_NAME={file_name}")
+            f.write(f"QGIS_PLUGIN_ARCHIVE_NAME={file_name}")
         
 print( "Done: {}".format(res))
