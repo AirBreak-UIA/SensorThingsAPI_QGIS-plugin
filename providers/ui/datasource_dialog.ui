@@ -211,6 +211,19 @@
           </widget>
          </item>
          <item>
+          <widget class="QCheckBox" name="chkOnMapExtent">
+           <property name="font">
+            <font>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Map Extent </string>
+           </property>
+          </widget>
+         </item>
+         <item>
           <widget class="QToolButton" name="btnFilterProperties">
            <property name="toolTip">
             <string>Filter location properties for layer grouping</string>

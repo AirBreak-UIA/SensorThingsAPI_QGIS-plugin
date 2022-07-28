@@ -32,10 +32,15 @@ import urllib.parse
 import pandas as pd
 
 from qgis.utils import iface
-from qgis.core import Qgis, QgsWkbTypes, QgsApplication, QgsMessageLog, QgsNetworkAccessManager
-from qgis.PyQt.QtCore import Qt, QObject, QEventLoop
+from qgis.core import (Qgis, 
+                       QgsWkbTypes, 
+                       QgsApplication, 
+                       QgsProject,
+                       QgsMessageLog,  
+                       QgsCoordinateReferenceSystem,
+                       QgsCoordinateTransform) 
+from qgis.PyQt.QtCore import Qt, QObject, QEventLoop, QUrl, QUrlQuery
 from qgis.PyQt.QtWidgets import QMessageBox
-from qgis.PyQt.QtNetwork import QNetworkRequest, QNetworkReply
 
 from SensorThingsAPI.providers.provider_frost import __FROST_PROVIDER_NAME__, FrostProvider
 
@@ -57,6 +62,7 @@ class FrostConnection(QObject):
         self._url = str(url or '').strip()
         self._loc_data = []
         self._connected = False
+        self._map_extent = False
         # grouping
         self._group_properties = {}
         self._group_rows = []
@@ -107,11 +113,12 @@ class FrostConnection(QObject):
         for prop_name, prop in self._group_properties.items():
             prop['skip'] = prop_name not in prop_list
     
-    def connect(self, callback=None):
+    def connect(self, callback=None, map_extent=False):
         """Connect to server Frost"""
         try:
             # init
             self._connected = False
+            self._map_extent = map_extent
             self._loc_data = []
             self._group_properties = {}
             
@@ -124,6 +131,10 @@ class FrostConnection(QObject):
             if not url:
                 return False
             self._url = url
+            
+            # add extent filter
+            if map_extent:
+                self._url = self._addExtentFilter()
         
             # set wait cursor
             QgsApplication.setOverrideCursor(Qt.WaitCursor)
@@ -197,7 +208,7 @@ class FrostConnection(QObject):
             if not properties:
                 return self.uniqueGroup(prop_text=self.tr("-- No filter property selected --"))
                     
-            # convert colum type to include NA values
+            # convert column type to include NA values
             for col_name in properties:
                 loc_df[col_name] = loc_df[col_name].astype(str)
                 
@@ -246,9 +257,22 @@ class FrostConnection(QObject):
         grp_name = '_'.join(prop_values)
         
         # compose group url
+        filter_param = ' and '.join(prop_filters)
+        grp_url = QUrl(self._url)
+        query = QUrlQuery(grp_url.query())
+        if query.hasQueryItem('$filter'):
+            filter_param = "{} and {} ".format(query.queryItemValue('$filter'), filter_param)   
+        
+        query.removeAllQueryItems('$filter')
+        query.addQueryItem('$filter', filter_param)
+        grp_url.setQuery(query)
+        grp_url = grp_url.toString()
+        
+        """
         url_param = "$filter={}".format(' and '.join(prop_filters))
         url_obj = urllib.parse.urlparse(self._url)
         grp_url = url_obj._replace(query=urllib.parse.quote(url_param), fragment='').geturl()
+        """
         
         # return group Info
         return {
@@ -279,4 +303,19 @@ class FrostConnection(QObject):
             if geom_type not in self._geom_types:
                 self._geom_types[geom_type] = 0
             self._geom_types[geom_type] += 1
+            
+    def _addExtentFilter(self):
+        """ """
+        # get extent
+        canvas = iface.mapCanvas()
+        canvasCrs = canvas.mapSettings().destinationCrs()
+        destCrs = QgsCoordinateReferenceSystem.fromEpsgId(4326)
+        transform = QgsCoordinateTransform(canvasCrs, destCrs, QgsProject.instance())
+        extent = transform.transform(canvas.extent())
+        # add filter parameter
+        url = QUrl(self._url)
+        query = QUrlQuery(url.query())
+        query.addQueryItem('$filter', f"st_intersects(location, geography'{extent.asWktPolygon()}')")
+        url.setQuery(query)
+        return url.toString()
         

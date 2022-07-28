@@ -147,7 +147,8 @@ class FrostDataSourceWidget(QgsAbstractDataSourceWidget, FORM_CLASS):
         self.btnFilterGeometries.setDisabled(True)
         self.chkUniqueLayer.setDisabled(True)
         self.chkUniqueLayer.setChecked(False)
-        
+        self.chkOnMapExtent.setDisabled(False)
+        self.chkOnMapExtent.setChecked(False)
         
         # signal connections
         self.btnConnect.clicked.connect(self.onConnect)
@@ -268,7 +269,8 @@ class FrostDataSourceWidget(QgsAbstractDataSourceWidget, FORM_CLASS):
                     '', Qgis.Info, wait_cursor=True)
                 
             # connect
-            if not conn_obj.connect(callback=self._showConnection):
+            map_extent = self.chkOnMapExtent.isChecked()
+            if not conn_obj.connect(callback=self._showConnection, map_extent=map_extent):
                 return
             
             #
@@ -404,8 +406,12 @@ class FrostDataSourceWidget(QgsAbstractDataSourceWidget, FORM_CLASS):
         finally:
             # show result
             self._removeProgressbar()
+            
             QTimer.singleShot(500, lambda self=self: self._showProgressbar(
                 self._messages.get('Loaded'), '', Qgis.Success, duration=2))
+            
+            # repaint canvas
+            QTimer.singleShot(500, lambda: iface.mapCanvas().refreshAllLayers())
     
     
     def onAddAll(self):
@@ -445,8 +451,12 @@ class FrostDataSourceWidget(QgsAbstractDataSourceWidget, FORM_CLASS):
         finally:
             # show result
             self._removeProgressbar()
+            
             QTimer.singleShot(500, lambda self=self: self._showProgressbar(
                 self._messages.get('Loaded'), '', Qgis.Success, duration=2))
+            
+            # repaint canvas
+            QTimer.singleShot(500, lambda: iface.mapCanvas().refreshAllLayers())
             
     
     def _showConnection(self, num, count):
