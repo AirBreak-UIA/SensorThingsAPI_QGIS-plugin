@@ -243,7 +243,8 @@ class FrostDataSourceWidget(QgsAbstractDataSourceWidget, FORM_CLASS):
         self._menuFilterGeometries = None 
         
         self.chkUniqueLayer.setDisabled(True)
-        #self.chkUniqueLayer.setChecked(False)
+        self.chkUniqueLayer.setChecked(False)
+        self.chkOnMapExtent.setChecked(False)
         self.btnFilterProperties.setDisabled(True)
         self.btnFilterGeometries.setDisabled(True)
         

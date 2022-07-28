@@ -19,6 +19,9 @@
   <property name="windowTitle">
    <string>SensorThings API - Upload layer from remote server</string>
   </property>
+  <property name="sizeGripEnabled">
+   <bool>true</bool>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
     <number>4</number>
