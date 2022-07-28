@@ -60,6 +60,7 @@ class FrostConnection(QObject):
         # connection data
         self._name = str(name or '')
         self._url = str(url or '').strip()
+        self._url_ext = ''
         self._loc_data = []
         self._connected = False
         self._map_extent = False
@@ -134,14 +135,16 @@ class FrostConnection(QObject):
             
             # add extent filter
             if map_extent:
-                self._url = self._addExtentFilter()
+                self._url_ext = self._addExtentFilter(self._url_ext)
+            else:
+                self._url_ext = self._url
         
             # set wait cursor
             QgsApplication.setOverrideCursor(Qt.WaitCursor)
             QgsApplication.processEvents(QEventLoop.ExcludeUserInputEvents)
             
             # get data
-            self._loc_data = FrostProvider.requestData(self._url, callback=callback)        
+            self._loc_data = FrostProvider.requestData(self._url_ext, callback=callback)        
             self._connected = True
             
             # get geometry types
@@ -170,7 +173,7 @@ class FrostConnection(QObject):
                 'name': self.tr('Locations'),
                 'properties': prop_text,
                 'count': "{0}/{0}".format(len(self._loc_data)),
-                'url': self._url
+                'url': self._url_ext
             }]
             
         # return groups
@@ -258,7 +261,7 @@ class FrostConnection(QObject):
         
         # compose group url
         filter_param = ' and '.join(prop_filters)
-        grp_url = QUrl(self._url)
+        grp_url = QUrl(self._url_ext)
         query = QUrlQuery(grp_url.query())
         if query.hasQueryItem('$filter'):
             filter_param = "{} and {} ".format(query.queryItemValue('$filter'), filter_param)   
@@ -270,7 +273,7 @@ class FrostConnection(QObject):
         
         """
         url_param = "$filter={}".format(' and '.join(prop_filters))
-        url_obj = urllib.parse.urlparse(self._url)
+        url_obj = urllib.parse.urlparse(self._url_ext)
         grp_url = url_obj._replace(query=urllib.parse.quote(url_param), fragment='').geturl()
         """
         
@@ -304,7 +307,7 @@ class FrostConnection(QObject):
                 self._geom_types[geom_type] = 0
             self._geom_types[geom_type] += 1
             
-    def _addExtentFilter(self):
+    def _addExtentFilter(self, url):
         """ """
         # get extent
         canvas = iface.mapCanvas()
@@ -313,7 +316,7 @@ class FrostConnection(QObject):
         transform = QgsCoordinateTransform(canvasCrs, destCrs, QgsProject.instance())
         extent = transform.transform(canvas.extent())
         # add filter parameter
-        url = QUrl(self._url)
+        url = QUrl(str(url))
         query = QUrlQuery(url.query())
         query.addQueryItem('$filter', f"st_intersects(location, geography'{extent.asWktPolygon()}')")
         url.setQuery(query)
