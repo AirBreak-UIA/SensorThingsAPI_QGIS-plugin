@@ -110,7 +110,8 @@ class FrostDataSourceWidget(QgsAbstractDataSourceWidget, FORM_CLASS):
             'Loaded': self.tr("Loaded layer"),
             'ConfirmRemove': self.tr("Confirm deletion"),
             'ConnRemove': self.tr('Are you sure you want to remove connection'),
-            'Connecting': self.tr('Connecting endpoint')
+            'Connecting': self.tr('Connecting endpoint'),
+            'ReadRecords': self.tr("Read endpoint records")
         }
         self._messages = {**self._messages, **self._customizeInternalMessages()}
         
@@ -465,7 +466,7 @@ class FrostDataSourceWidget(QgsAbstractDataSourceWidget, FORM_CLASS):
         # clear message bar
         msgBar = iface.messageBar()
         msgBar.clearWidgets()
-        msgBar.pushMessage('', "{}: {}\\{}".format(self.tr("Read endpoint records"), num, count), Qgis.Info)
+        msgBar.pushMessage('', "{}: {}\\{}".format(self._messages.get('ReadRecords'), num, count), Qgis.Info)
         msgBar.repaint()
     
     def _showProgressbar(self, msg, title, level, wait_cursor=False, duration=0):

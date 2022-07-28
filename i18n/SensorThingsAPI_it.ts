@@ -9,84 +9,89 @@
         <translation>SensorThings API - Carica livello da server remoto</translation>
     </message>
     <message>
-        <location filename="../providers/ui/datasource_dialog.ui" line="96"/>
+        <location filename="../providers/ui/datasource_dialog.ui" line="99"/>
         <source>Connect</source>
         <translation>Connetti</translation>
     </message>
     <message>
-        <location filename="../providers/ui/datasource_dialog.ui" line="266"/>
+        <location filename="../providers/ui/datasource_dialog.ui" line="282"/>
         <source>Add</source>
         <translation>Aggiungi</translation>
     </message>
     <message>
-        <location filename="../providers/ui/datasource_dialog.ui" line="279"/>
+        <location filename="../providers/ui/datasource_dialog.ui" line="295"/>
         <source>Close</source>
         <translation>Chiudi</translation>
     </message>
     <message>
-        <location filename="../providers/ui/datasource_dialog.ui" line="286"/>
+        <location filename="../providers/ui/datasource_dialog.ui" line="302"/>
         <source>Add all</source>
         <translation>Aggiungi tutti</translation>
     </message>
     <message>
-        <location filename="../providers/ui/datasource_dialog.ui" line="103"/>
+        <location filename="../providers/ui/datasource_dialog.ui" line="106"/>
         <source>New</source>
         <translation>Nuova</translation>
     </message>
     <message>
-        <location filename="../providers/ui/datasource_dialog.ui" line="110"/>
+        <location filename="../providers/ui/datasource_dialog.ui" line="113"/>
         <source>Modify</source>
         <translation>Modifica</translation>
     </message>
     <message>
-        <location filename="../providers/ui/datasource_dialog.ui" line="117"/>
+        <location filename="../providers/ui/datasource_dialog.ui" line="120"/>
         <source>Remove</source>
         <translation>Rimuovi</translation>
     </message>
     <message>
-        <location filename="../providers/ui/datasource_dialog.ui" line="173"/>
+        <location filename="../providers/ui/datasource_dialog.ui" line="176"/>
         <source>Options</source>
         <translation>Opzioni</translation>
     </message>
     <message>
-        <location filename="../providers/ui/datasource_dialog.ui" line="209"/>
+        <location filename="../providers/ui/datasource_dialog.ui" line="212"/>
         <source>Unique layer for all locations</source>
-        <translation>Unico livello per tutte le postazioni</translation>
+        <translation>Singolo livello postazioni</translation>
     </message>
     <message>
-        <location filename="../providers/ui/datasource_dialog.ui" line="216"/>
+        <location filename="../providers/ui/datasource_dialog.ui" line="232"/>
         <source>Filter location properties for layer grouping</source>
         <translation>Filtra le proprietà delle postazioni per il raggruppamento dei livelli</translation>
     </message>
     <message>
-        <location filename="../providers/ui/datasource_dialog.ui" line="219"/>
+        <location filename="../providers/ui/datasource_dialog.ui" line="235"/>
         <source>Filter properties... </source>
         <translation>Filtra proprietà... </translation>
     </message>
     <message>
-        <location filename="../providers/ui/connection_dialog.ui" line="32"/>
+        <location filename="../providers/ui/connection_dialog.ui" line="26"/>
         <source>SensorThings API - Connection to server</source>
         <translation>SensorThings API - Connessione al server</translation>
     </message>
     <message>
-        <location filename="../providers/ui/connection_dialog.ui" line="44"/>
+        <location filename="../providers/ui/connection_dialog.ui" line="41"/>
         <source>Connection details</source>
         <translation>Dettagli connessione</translation>
     </message>
     <message>
-        <location filename="../providers/ui/connection_dialog.ui" line="97"/>
+        <location filename="../providers/ui/connection_dialog.ui" line="94"/>
         <source>Name</source>
         <translation>Nome</translation>
     </message>
     <message>
-        <location filename="../providers/ui/connection_dialog.ui" line="123"/>
+        <location filename="../providers/ui/connection_dialog.ui" line="120"/>
         <source>URL</source>
         <translation>URL</translation>
     </message>
     <message>
-        <location filename="../providers/ui/datasource_dialog.ui" line="226"/>
+        <location filename="../providers/ui/datasource_dialog.ui" line="242"/>
         <source>Filter Geometries... </source>
         <translation>Filtra geometrie... </translation>
+    </message>
+    <message>
+        <location filename="../providers/ui/datasource_dialog.ui" line="225"/>
+        <source>Map Extent </source>
+        <translation>Estensione mappa</translation>
     </message>
 </context>
 <context>
@@ -94,20 +99,20 @@
     <message>
         <location filename="../providers/connection_frost.py" line="150"/>
         <source>HTTP request failed; response code</source>
-        <translation>Richiesta HTTP fallita; codice di risposta</translation>
+        <translation type="obsolete">Richiesta HTTP fallita; codice di risposta</translation>
     </message>
     <message>
-        <location filename="../providers/connection_frost.py" line="212"/>
+        <location filename="../providers/connection_frost.py" line="219"/>
         <source>-- No filter property selected --</source>
         <translation>-- Nessuna proprietà filtro selezionata --</translation>
     </message>
     <message>
-        <location filename="../providers/connection_frost.py" line="179"/>
+        <location filename="../providers/connection_frost.py" line="180"/>
         <source>Locations</source>
         <translation>Postazioni</translation>
     </message>
     <message>
-        <location filename="../providers/connection_frost.py" line="231"/>
+        <location filename="../providers/connection_frost.py" line="235"/>
         <source>Connection</source>
         <translation>Connessione</translation>
     </message>
@@ -133,135 +138,145 @@
 <context>
     <name>FrostDataSourceWidget</name>
     <message>
-        <location filename="../providers/source_select_provider_frost.py" line="109"/>
+        <location filename="../providers/source_select_provider_frost.py" line="108"/>
         <source>HTTP request failed; response code</source>
         <translation>Richiesta HTTP fallita; codice di risposta</translation>
     </message>
     <message>
-        <location filename="../providers/source_select_provider_frost.py" line="106"/>
+        <location filename="../providers/source_select_provider_frost.py" line="105"/>
         <source>Group</source>
         <translation>Gruppo</translation>
     </message>
     <message>
-        <location filename="../providers/source_select_provider_frost.py" line="107"/>
+        <location filename="../providers/source_select_provider_frost.py" line="106"/>
         <source>Properties</source>
         <translation>Proprietà</translation>
     </message>
     <message>
-        <location filename="../providers/source_select_provider_frost.py" line="108"/>
+        <location filename="../providers/source_select_provider_frost.py" line="107"/>
         <source>Count</source>
         <translation>Conteggio</translation>
     </message>
     <message>
-        <location filename="../providers/source_select_provider_frost.py" line="112"/>
+        <location filename="../providers/source_select_provider_frost.py" line="111"/>
         <source>Confirm deletion</source>
         <translation>Conferma rimozione</translation>
     </message>
     <message>
-        <location filename="../providers/source_select_provider_frost.py" line="113"/>
+        <location filename="../providers/source_select_provider_frost.py" line="112"/>
         <source>Are you sure you want to remove connection</source>
         <translation>Sei sicuro di volere rimuovere la connessione</translation>
     </message>
     <message>
-        <location filename="../providers/source_select_provider_frost.py" line="111"/>
+        <location filename="../providers/source_select_provider_frost.py" line="110"/>
         <source>Loaded layer</source>
         <translation>Caricato livello</translation>
     </message>
     <message>
-        <location filename="../providers/source_select_provider_frost.py" line="110"/>
+        <location filename="../providers/source_select_provider_frost.py" line="109"/>
         <source>Loading layer</source>
         <translation>Caricamento livello</translation>
+    </message>
+    <message>
+        <location filename="../providers/source_select_provider_frost.py" line="114"/>
+        <source>Read endpoint records</source>
+        <translation>Letti record endpoint</translation>
+    </message>
+    <message>
+        <location filename="../providers/source_select_provider_frost.py" line="113"/>
+        <source>Connecting endpoint</source>
+        <translation>Connessione endpoint</translation>
     </message>
 </context>
 <context>
     <name>FrostProvider</name>
     <message>
-        <location filename="../providers/provider_frost.py" line="326"/>
+        <location filename="../providers/provider_frost.py" line="432"/>
         <source>Whole number (integer)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../providers/provider_frost.py" line="326"/>
+        <location filename="../providers/provider_frost.py" line="432"/>
         <source>Decimal number (real)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../providers/provider_frost.py" line="326"/>
+        <location filename="../providers/provider_frost.py" line="432"/>
         <source>Text (string)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../providers/provider_frost.py" line="326"/>
+        <location filename="../providers/provider_frost.py" line="432"/>
         <source>Date</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../providers/provider_frost.py" line="326"/>
+        <location filename="../providers/provider_frost.py" line="432"/>
         <source>Time</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../providers/provider_frost.py" line="326"/>
+        <location filename="../providers/provider_frost.py" line="432"/>
         <source>Date &amp; Time</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../providers/provider_frost.py" line="326"/>
+        <location filename="../providers/provider_frost.py" line="432"/>
         <source>Whole number (smallint - 16bit)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../providers/provider_frost.py" line="326"/>
+        <location filename="../providers/provider_frost.py" line="432"/>
         <source>Whole number (integer - 32bit)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../providers/provider_frost.py" line="326"/>
+        <location filename="../providers/provider_frost.py" line="432"/>
         <source>Whole number (integer - 64bit)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../providers/provider_frost.py" line="326"/>
+        <location filename="../providers/provider_frost.py" line="432"/>
         <source>Decimal number (numeric)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../providers/provider_frost.py" line="326"/>
+        <location filename="../providers/provider_frost.py" line="432"/>
         <source>Decimal number (decimal)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../providers/provider_frost.py" line="326"/>
+        <location filename="../providers/provider_frost.py" line="432"/>
         <source>Decimal number (double)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../providers/provider_frost.py" line="326"/>
+        <location filename="../providers/provider_frost.py" line="432"/>
         <source>Text, unlimited length (text)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../providers/provider_frost.py" line="326"/>
+        <location filename="../providers/provider_frost.py" line="432"/>
         <source>Boolean</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../providers/provider_frost.py" line="326"/>
+        <location filename="../providers/provider_frost.py" line="432"/>
         <source>Binary object (BLOB)</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../providers/provider_frost.py" line="433"/>
         <source>HTTP request failed; response code</source>
-        <translation>Richiesta HTTP fallita, codice di risposta</translation>
+        <translation type="obsolete">Richiesta HTTP fallita, codice di risposta</translation>
     </message>
     <message>
-        <location filename="../providers/provider_frost.py" line="612"/>
+        <location filename="../providers/provider_frost.py" line="698"/>
         <source>Geometry type not allowed</source>
         <translation>Tipo geometria non ammessa</translation>
     </message>
     <message>
-        <location filename="../providers/provider_frost.py" line="623"/>
+        <location filename="../providers/provider_frost.py" line="709"/>
         <source>Skipped invalid location</source>
         <translation>Ignorata postazione invalida</translation>
     </message>
@@ -316,41 +331,51 @@
         <source>Loading layer</source>
         <translation>Caricamento livello</translation>
     </message>
+    <message>
+        <location filename="../sensor_things_select_provider.py" line="61"/>
+        <source>Connecting endpoint</source>
+        <translation>Connessione endpoint</translation>
+    </message>
+    <message>
+        <location filename="../sensor_things_select_provider.py" line="62"/>
+        <source>Read endpoint records</source>
+        <translation>Letti record endpoint</translation>
+    </message>
 </context>
 <context>
     <name>SensorThingsLocationDialog</name>
     <message>
-        <location filename="../sensor_things_location_dlg.py" line="80"/>
+        <location filename="../sensor_things_location_dlg.py" line="83"/>
         <source>Location</source>
         <translation>Postazione</translation>
     </message>
     <message>
-        <location filename="../sensor_things_location_dlg.py" line="119"/>
+        <location filename="../sensor_things_location_dlg.py" line="148"/>
         <source>Invalid layer URL</source>
         <translation>URL livello invalido</translation>
     </message>
     <message>
-        <location filename="../sensor_things_location_dlg.py" line="262"/>
+        <location filename="../sensor_things_location_dlg.py" line="293"/>
         <source>Location dialog visualization</source>
         <translation>Visualizzazione dialogo Postazioni</translation>
     </message>
     <message>
-        <location filename="../sensor_things_location_dlg.py" line="237"/>
+        <location filename="../sensor_things_location_dlg.py" line="268"/>
         <source>Things URL not valued</source>
         <translation>URL things non valorizzato</translation>
     </message>
     <message>
-        <location filename="../sensor_things_location_dlg.py" line="279"/>
+        <location filename="../sensor_things_location_dlg.py" line="361"/>
         <source>Invalid Thing ID</source>
         <translation>Thing ID invalido</translation>
     </message>
     <message>
-        <location filename="../sensor_things_location_dlg.py" line="297"/>
+        <location filename="../sensor_things_location_dlg.py" line="379"/>
         <source>Loading data</source>
         <translation>Caricamento dati</translation>
     </message>
     <message>
-        <location filename="../sensor_things_location_dlg.py" line="341"/>
+        <location filename="../sensor_things_location_dlg.py" line="423"/>
         <source>Loading Observations data</source>
         <translation>Caricamento dati Osservazioni</translation>
     </message>
@@ -422,42 +447,42 @@
 <context>
     <name>SensorThingsPlugin</name>
     <message>
-        <location filename="../sensor_things.py" line="122"/>
+        <location filename="../sensor_things.py" line="123"/>
         <source>Registered &apos;Frost&apos; provider</source>
         <translation>Registrato provider &apos;Frost&apos;</translation>
     </message>
     <message>
-        <location filename="../sensor_things.py" line="126"/>
+        <location filename="../sensor_things.py" line="127"/>
         <source>Registered data source selector for &apos;Frost&apos; provider</source>
         <translation>Registrato selettore sorgente dati per provider &apos;Frost&apos;</translation>
     </message>
     <message>
-        <location filename="../sensor_things.py" line="144"/>
+        <location filename="../sensor_things.py" line="145"/>
         <source>Upload layer from remote server</source>
         <translation>Carica livello da server remoto</translation>
     </message>
     <message>
-        <location filename="../sensor_things.py" line="156"/>
+        <location filename="../sensor_things.py" line="157"/>
         <source>Show location information</source>
         <translation>Mostra informazioni di una postazione</translation>
     </message>
     <message>
-        <location filename="../sensor_things.py" line="173"/>
+        <location filename="../sensor_things.py" line="174"/>
         <source>SensorThings API plugin command toolbar</source>
         <translation>Barra dei comandi del plugin SensorThings API</translation>
     </message>
     <message>
-        <location filename="../sensor_things.py" line="189"/>
+        <location filename="../sensor_things.py" line="190"/>
         <source>Unregistered data source selector for &apos;Frost&apos; provider</source>
         <translation>Deregistrato selettore sorgente dati per provider &apos;Frost&apos;</translation>
     </message>
     <message>
-        <location filename="../sensor_things.py" line="192"/>
+        <location filename="../sensor_things.py" line="193"/>
         <source>Unregistered &apos;Frost&apos; provider</source>
         <translation>Deregistrato provider &apos;Frost&apos;</translation>
     </message>
     <message>
-        <location filename="../sensor_things.py" line="227"/>
+        <location filename="../sensor_things.py" line="228"/>
         <source>Select a location</source>
         <translation>Selezionare una Postazione</translation>
     </message>

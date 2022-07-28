@@ -58,7 +58,8 @@ class SensorThingsFrostDataSourceWidget(FrostDataSourceWidget):
             'Loaded': self.tr("Loaded layer"),
             'ConfirmRemove': self.tr("Confirm deletion"),
             'ConnRemove': self.tr('Are you sure you want to remove connection'),
-            'Connecting': self.tr('Connecting endpoint')
+            'Connecting': self.tr('Connecting endpoint'),
+            'ReadRecords': self.tr("Read endpoint records")
         }
         
     def _applyLayerStyle(self, layer):
