@@ -17,12 +17,12 @@ Note: the following screenshots show the user interface in Italian.
 <img width="416" alt="New SensorThingsAPI endpoint" src="https://user-images.githubusercontent.com/110025591/181604880-6bef7010-a593-43cd-9f5d-c04313552baf.png">
 
 To test the plugin, the following endpoints can be configured:
--	https://iot.comune.fe.it/FROST-Server/v1.1/Locations 
--	https://airquality-frost.k8s.ilt-dmz.iosb.fraunhofer.de/v1.1/Locations 
--	https://ogc-demo.k8s.ilt-dmz.iosb.fraunhofer.de/v1.1/Locations
--	https://iot.hamburg.de/v1.1/Locations
--	https://sensors.bgs.ac.uk/FROST-Server/v1.1/Locations
--	http://covidsta.hft-stuttgart.de/server/v1.1/Locations
+-	https://iot.comune.fe.it/FROST-Server/v1.1/Locations (data about air quality, bike transits, traffic by Municipality of Ferrara, Italy)
+-	https://airquality-frost.k8s.ilt-dmz.iosb.fraunhofer.de/v1.1/Locations (data about air quality from AQ stations in Europe, by Fraunhofer Institute, Germany)
+- https://demography.k8s.ilt-dmz.iosb.fraunhofer.de/v1.1/Locations (demographic statistics, by Fraunhofer Institute, Germany)
+-	https://iot.hamburg.de/v1.1/Locations (by City of Hamburg)
+-	https://ogc-demo.k8s.ilt-dmz.iosb.fraunhofer.de/v1.1/Locations (water data by OGC)
+-	http://covidsta.hft-stuttgart.de/server/v1.1/Locations (COVID data by HFT Stuttgart, Germany)
 
 Click the Connect button to list all the locations available and optionally filter them using their own properties; select one or more items and clic the button Add (or double clic).
 
