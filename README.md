@@ -24,6 +24,9 @@ To test the plugin, the following endpoints can be configured:
 -	https://ogc-demo.k8s.ilt-dmz.iosb.fraunhofer.de/v1.1/Locations (water data by OGC)
 -	http://covidsta.hft-stuttgart.de/server/v1.1/Locations (COVID data by HFT Stuttgart, Germany)
 
+... other public endpoints also available at https://github.com/opengeospatial/sensorthings/blob/master/PublicEndPoints.md
+
+
 Click the Connect button to list all the locations available and optionally filter them using their own properties; select one or more items and clic the button Add (or double clic).
 
 <img width="421" alt="List of Locations (grouped by properties)" src="https://user-images.githubusercontent.com/110025591/181605595-d32b7b29-b68a-4143-a2ab-1e66ab738a09.png">
