@@ -4,7 +4,8 @@ Plugin enabling QGIS software (www.qgis.org) to access dynamic data from sensors
 The overall objective is to provide functionalities for accessing SensorThings API similarly to what already implemented for the Geonext web map viewer (already implemented and described in the previous paragraph).
 
 Hereafter, we provide simple how-to instructions for using the “SensorThingsAPI” plugin in QGIS. 
-To correctly download the plugin from this repository, please refer to https://github.com/AirBreak-UIA/SensorThingsAPI_QGIS-plugin/issues/1
+
+**To correctly download the plugin from this repository as zip file, please see Issue https://github.com/AirBreak-UIA/SensorThingsAPI_QGIS-plugin/issues/1**
 
 1)	Once installed (as local zip file), the user interface shows a simple menu and a toolbar with two commands:
 -	Upload 'SensorThingsAPI' layer from remote server
