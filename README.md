@@ -1,9 +1,11 @@
 # SensorThingsAPI QGIS plugin
-Plugin enabling QGIS software (www.qgis.org) to access dynamic data from sensors, using SensorThings API protocol (https://www.ogc.org/standards/sensorthings)
+The SensorThings API plugin for QGIS has been developed by Deda Next (former Dedagroup Public Services, https://www.dedanext.it/) within the AIR-BREAK project (co-funded by UIA program, https://www.uia-initiative.eu/en/uia-cities/ferrara).
 
-The overall objective is to provide functionalities for accessing SensorThings API similarly to what already implemented for the Geonext web map viewer (already implemented and described in the previous paragraph).
+The plugin enables QGIS software (www.qgis.org) to access dynamic data from sensors, using SensorThings API protocol (https://www.ogc.org/standards/sensorthings)
 
-Hereafter, we provide simple how-to instructions for using the “SensorThingsAPI” plugin in QGIS. 
+The overall objective is to provide functionalities for accessing SensorThings API endpoints and interact with temporal data (timeseries).
+
+Hereafter, you find "how-to" instructions for using the SensorThingsAPI plugin in QGIS. 
 
 **To correctly download the plugin from this repository as zip file, please see Issue https://github.com/AirBreak-UIA/SensorThingsAPI_QGIS-plugin/issues/1**
 
