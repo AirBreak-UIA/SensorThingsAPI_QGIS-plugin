@@ -1,4 +1,4 @@
-SensorThings API * 2022 Dedagroup Spa
+SensorThings API * 2022 Deda Next srl
 
 Licensed under the terms of GNU GPL v3 (or any layer)
 http://www.gnu.org/copyleft/gpl.html
