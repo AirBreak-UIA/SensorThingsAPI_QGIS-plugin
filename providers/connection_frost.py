@@ -30,11 +30,12 @@ import json
 import traceback
 import urllib.parse
 
+from qgis.core import Qgis, QgsMessageLog
+
 # try to import module for image exif metadata
 try:
     import pandas as pd
 except ModuleNotFoundError as e:
-    from qgis.core import Qgis, QgsMessageLog
     QgsMessageLog.logMessage("Module not found: 'Pandas'", 'FrostConnection', Qgis.Warning)
     QgsMessageLog.logMessage("Ubuntu example: sudo apt install python3-pandas", 'FrostConnection', Qgis.Warning)
 
