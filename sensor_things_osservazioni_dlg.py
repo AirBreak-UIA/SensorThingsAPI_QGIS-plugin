@@ -205,7 +205,7 @@ class SensorThingsObservationDialog(QtWidgets.QDialog):
                                 field_value = row.get(field_name, '')
                                 try:
                                     if 'index' in fld:
-                                        field_index = fld.get('index')
+                                        field_index = int(fld.get('index'))
                                         field_value = field_value[field_index]      
                                 except (TypeError, IndexError):
                                     field_value = ''
