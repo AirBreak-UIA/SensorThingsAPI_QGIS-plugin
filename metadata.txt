@@ -9,15 +9,19 @@
 [general]
 name=SensorThings API
 qgisMinimumVersion=3.14
-description=Integrates QGIS with SensorThings API
+description=The plugin enables QGIS software (www.qgis.org) to access dynamic data from sensors, using SensorThings API protocol (https://www.ogc.org/standards/sensorthings)
 version=1.1.10
-author=Sandro Moretti
+author=Deda Next (Sandro Moretti)
 email=sandro.moretti@dedagroup.it
 
-about=Integrates QGIS with SensorThings API
+about=The SensorThings API plugin for QGIS has been developed by Deda Next (Sandro Moretti) within the AIR-BREAK project.
 
-#tracker=https://github.com/..
-#repository=https://github.com/...
+      The plugin enables QGIS software to access dynamic data from sensors, using SensorThings API protocol.
+
+      The overall objective is to provide functionalities for accessing SensorThings API endpoints and interact with temporal data (timeseries).
+
+tracker=https://github.com/AirBreak-UIA/SensorThingsAPI_QGIS-plugin/issues
+repository=https://github.com/AirBreak-UIA/SensorThingsAPI_QGIS-plugin
 # End of mandatory metadata
 
 # Recommended items:
@@ -26,9 +30,9 @@ about=Integrates QGIS with SensorThings API
 # changelog=
 
 # Tags are comma separated with spaces allowed
-tags=frost, server, layer
+tags=ogc, sensorthings api, sta, IoT
 
-homepage=
+homepage=https://github.com/AirBreak-UIA/SensorThingsAPI_QGIS-plugin
 category=Plugins
 icon=icons/frost-layer-icon.png
 # experimental flag
@@ -36,4 +40,6 @@ experimental=True
 
 # deprecated flag (applies to the whole plugin, not just a single version)
 deprecated=False
+
+
 
