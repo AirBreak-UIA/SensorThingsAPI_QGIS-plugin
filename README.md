@@ -9,6 +9,8 @@ Hereafter, you find "how-to" instructions for using the SensorThingsAPI plugin i
 
 **To correctly download the plugin from this repository as zip file, please see Issue https://github.com/AirBreak-UIA/SensorThingsAPI_QGIS-plugin/issues/1**
 
+**Please, consider that Pandas libraries is required**
+
 1)	Once installed (as local zip file), the user interface shows a simple menu and a toolbar with two commands:
 -	Upload 'SensorThingsAPI' layer from remote server
 -	Show location information
